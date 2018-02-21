@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name="theme-color" content="#000000"><link rel="manifest" href="/manifest.json"><link rel="shortcut icon" href="/favicon.ico"><link rel='stylesheet' href='https://d33wubrfki0l68.cloudfront.net/css/074924f3e01e67f45e728c3cb8653acdfa43bb54/produi.css'/><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"><script async src="//api.adinplay.com/display/pub/BRH/bruh.io/display.min.js"></script><script>var aiptag=aiptag||{};aiptag.cmd=aiptag.cmd||[],aiptag.cmd.display=aiptag.cmd.display||[]</script><title>BRUH.IO | Battle Royale in your browser!</title></head><body><noscript>You need to enable JavaScript to run BRUH.IO!</noscript><script src="https://checkout.stripe.com/checkout.js"></script><script>window.stripeHandler=StripeCheckout.configure({key:"pk_live_YWuDoiHGi8quRiKY8HggU90b",image:"https://stripe.com/img/documentation/checkout/marketplace.png",locale:"auto",token:function(e){window.dispatchEvent(new CustomEvent("stripeToken",{detail:{token:e}}))},closed:function(e){window.currentlyPurchasingSkin=void 0,window.currentUserEmail=void 0}})</script><script type='text/javascript' src='https://d33wubrfki0l68.cloudfront.net/js/b61df94d6069ff60e1d3c486602bc57616e448bc/js/pixi.min.js'></script><script>function loadScript(src, callback) {
+            var script,
+                ready,
+                tag;
+            ready = false;
+            script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = src;
+            script.onload = script.onreadystatechange = function() {
+                if (!ready && (!this.readyState || this.readyState == 'complete')) {
+                    ready = true;
+                    callback(script);
+                }
+            };
+            tag = document.getElementsByTagName('script')[0];
+            tag.parentNode.insertBefore(script, tag);
+        }
+
+        function tryToStart(settings) {
+            var startIsReady = Boolean(window.start)
+            if (startIsReady) {
+                window.start(settings)
+            } else {
+                console.log('Start wasnt ready yet; waiting')
+                setTimeout(() => {
+                    tryToStart(settings)
+                }, 250)
+            }
+        }
+
+        function startGameAndConnectToServer(settings) {
+            var scriptLocation = window.location.href.indexOf('localhost') > -1 ? 'http://localhost:3001/game.js' : 
+                                 window.location.href.indexOf('test-bruh') > -1 ? 'http://test-bruh.bitfoxgames.com:3001/game.js' :
+                                 'https://bitfoxgames.com/bruh/' + settings.clientVersion + '/game.js'
+            console.info('Loading game client @ URL:', scriptLocation)
+            loadScript(scriptLocation, function() {
+                document.querySelector("#menu-ui").style.display = "none"
+                document.querySelector("#game-ui").style.display = "block"
+                document.querySelector("#main-canvas").style.display = "block"
+                tryToStart(settings)
+            })
+        }
+
+        window.addEventListener('playGame', function (event) {
+            window.gameConfig = event.detail
+            document.querySelector('#loading-screen').style.display = 'block'
+            startGameAndConnectToServer(event.detail)
+        })</script><img style="display:none" src="https://d33wubrfki0l68.cloudfront.net/ecbee783427d5330873fda9b14eb0b30a46e950f/b8d83/images/bruhnswick_full.png"><div id="loading-screen"><div class="loading-inner"><img src="https://d33wubrfki0l68.cloudfront.net/bf836adeef69c021974f1ab16b31f4e77e5fc826/dbabe/images/bitfox_logo_small.png" alt="Bitfox Games"><h2>Loading <span>bruh.io</span></h2></div></div><div id="game-ui"></div><div id="menu-ui"></div><canvas id="main-canvas"></canvas><script async src="https://www.googletagmanager.com/gtag/js?id=UA-108462634-2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-108462634-2")</script><script src="https://cdn.ravenjs.com/3.20.1/raven.min.js" crossorigin="anonymous"></script><script>-1===window.location.href.indexOf("localhost")&&(console.log("hooking into sentry",window.location.href.indexOf("localhost")),Raven.config("https://185faf0fd9dd4723aa5868d5e1d6e8b9@sentry.io/254648").install())</script><script type='text/javascript' src='https://d33wubrfki0l68.cloudfront.net/js/b72a90bdec4e35e8f051d6db8d31a2f6297ae913/static/js/main.b214f800.js'></script></body></html>
